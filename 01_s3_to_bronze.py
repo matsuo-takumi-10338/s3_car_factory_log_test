@@ -1,6 +1,6 @@
-s3_source_path = "s3://databricks-sample-bucket-20260602/raw/"
+s3_source_path = "s3://databricks-sample-bucket-20260602/car_factory_dev/raw/"
 
-checkpoint_path = "s3://databricks-sample-bucket-20260602/checkpoints/car_factory_bronze/"
+checkpoint_path = "s3://databricks-sample-bucket-20260602/car_factory_dev/checkpoints/bronze/"
 
 
 bronze_stream = (spark.readStream
