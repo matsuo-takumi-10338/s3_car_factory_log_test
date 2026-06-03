@@ -2,6 +2,8 @@ s3_source_path = "s3://databricks-sample-bucket-20260602/car_factory_dev/raw/"
 
 checkpoint_path = "s3://databricks-sample-bucket-20260602/car_factory_dev/checkpoints/bronze/"
 
+database_bronze_path = "s3://databricks-sample-bucket-20260602/car_factory_dev/database/bronze/"
+
 
 bronze_stream = (spark.readStream
     .format("cloudFiles")
@@ -16,4 +18,5 @@ query = (bronze_stream.writeStream
     .outputMode("append")
     .option("checkpointLocation", checkpoint_path)
     .trigger(availableNow=True) 
+    .option("path", database_bronze_path)
     .toTable("car_factory_dev.bronze.car_factory_bronze")) 
