@@ -1,4 +1,4 @@
-class EnvConfig:
+class EnvParams:
     
     def __init__(self, layer="bronze"):
         self.layer = layer
