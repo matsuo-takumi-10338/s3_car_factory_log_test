@@ -1,5 +1,5 @@
 bundle:
-  name: car_factory_bundle
+  name: cf_bundle
 
 include:
   - infrastructure/*.yml

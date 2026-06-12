@@ -26,39 +26,19 @@ class EnvParams:
 
         if param == "s3_source_path":
             if self.domain == "mom_factory":
-                return f"s3://{self.s3_bucket}/raw/"
+                return f"s3://{self.s3_bucket}/{self.project_dir}/raw/"
             else:
-                return f"s3://{self.s3_bucket}/raw/production_standard/"
+                return f"s3://{self.s3_bucket}/{self.project_dir}/raw/{self.layer}/"
         
         if param == "schema_location":
-            if self.domain == "mom_factory":
-                return f"s3://{self.s3_bucket}/checkpoints/{self.layer}/_schema_metadata"
-            else:
-                return f"s3://{self.s3_bucket}/checkpoints/production_standard/_schema_metadata"
+            return f"s3://{self.s3_bucket}/{self.project_dir}/checkpoints/{self.layer}/_schema_metadata"
         
         if param == "checkpoint_location":
-            if self.domain == "mom_factory":
-                return f"s3://{self.s3_bucket}/checkpoints/{self.layer}/"
-            else:
-                return f"s3://{self.s3_bucket}/checkpoints/production_standard/"
-        
-        if param == "table_name":
-            if self.domain == "mom_factory":
-                return f"cf_{self.env}.{self.layer}.{self.layer}_mom_factory"
-            else:
-                return f"cf_{self.env}.{self.layer}.{self.layer}_engineering"
+            return f"s3://{self.s3_bucket}/{self.project_dir}/checkpoints/{self.layer}/"    
 
-        if param == "data_path":
-            if self.domain == "mom_factory":
-                return f"s3://{self.s3_bucket}/database/{self.layer}/"
-            else:
-                return f"s3://{self.s3_bucket}/database/production_standard/"
-        
         return None
     
-    def get_env_params(self, param):
-        if param == "env":
-            return self.env
+    def get_secret_params(self, param):
         
         if param == "s3_bucket":
             return self.s3_bucket

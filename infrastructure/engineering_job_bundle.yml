@@ -1,0 +1,18 @@
+resources:
+  jobs:
+    cf-engineering-job:
+      name: "cf-engineering-job-${bundle.target}"
+      trigger:
+        pause_status: UNPAUSED
+        file_arrival:
+          url: s3://cf-engineering-bucket-dev/engineering_dev/raw/
+      tasks:
+        - task_key: s3_to_master
+          spark_python_task:
+            python_file: /Workspace/Shared/cf_${bundle.target}/src/01_engineering_chain/production_standard.py
+          environment_key: Default
+      environments:
+        - environment_key: Default
+          spec:
+            environment_version: "5"
+            
